@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的作品集</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      line-height: 1.6;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://source.unsplash.com/1600x900/?creative,design') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 4em;
+      margin-bottom: 0.5em;
+    }
+    header p {
+      font-size: 1.5em;
+    }
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #222;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>我的作品集</h1>
+      <p>展示设计、摄影、开发等创意项目</p>
+    </div>
+  </header>
+
+  <section>
+    <h2 class="section-title">关于我</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto;">
+      我是一名热爱创意的设计师/开发者/摄影师，擅长将灵感转化为可见的作品。欢迎浏览我的项目合集。
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">精选作品</h2>
+    <div class="gallery">
+      <img src="https://source.unsplash.com/800x600/?design" alt="作品1" />
+      <img src="https://source.unsplash.com/800x600/?code" alt="作品2" />
+      <img src="https://source.unsplash.com/800x600/?art" alt="作品3" />
+      <img src="https://source.unsplash.com/800x600/?project" alt="作品4" />
+      <img src="https://source.unsplash.com/800x600/?photography" alt="作品5" />
+      <img src="https://source.unsplash.com/800x600/?technology" alt="作品6" />
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 我的名字 | 由我设计与开发
+  </footer>
+</body>
+</html>
