@@ -1,52 +1,32 @@
 <template>
   <div class="gallery-page">
     <h1>作品集</h1>
-    <p>以下是我近期的一些作品示例：</p>
+    <p>下列均为纯色占位图片，点击任一项可原地放大</p>
 
     <div class="gallery-grid">
       <GalleryItem
           v-for="(img, idx) in images"
           :key="idx"
           :img="img"
-          @enlarge="handleEnlarge"
       />
     </div>
-
-    <!-- 放大预览弹窗 -->
-    <Lightbox
-        v-if="showLightbox"
-        :img="selectedImage"
-        @close="showLightbox = false"
-    />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { images } from '../assets/images.js'; // 你的图片数据数组
-import GalleryItem from '../components/GalleryItem.vue';
-import Lightbox from '../components/Lightbox.vue';
+import { images } from '@/assets/images.js';
+import GalleryItem from '@/components/GalleryItem.vue';
 
 export default {
   name: 'Gallery',
   components: {
-    GalleryItem,
-    Lightbox
+    GalleryItem
   },
   setup() {
-    const showLightbox = ref(false);
-    const selectedImage = ref(null);
-
-    const handleEnlarge = (img) => {
-      selectedImage.value = img;
-      showLightbox.value = true;
-    };
-
+    const data = ref(images);
     return {
-      images,
-      showLightbox,
-      selectedImage,
-      handleEnlarge
+      images: data
     };
   }
 };
@@ -55,11 +35,13 @@ export default {
 <style scoped>
 .gallery-page {
   padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
+
 .gallery-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  margin-top: 2rem;
 }
 </style>

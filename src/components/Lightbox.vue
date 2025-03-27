@@ -2,7 +2,14 @@
   <div class="lightbox-backdrop" @click.self="closeLightbox">
     <div class="lightbox-content">
       <button class="close-btn" @click="closeLightbox">关闭</button>
-      <img :src="img.fullsize" :alt="img.title" />
+
+      <div v-if="img.fullsize">
+        <img :src="img.fullsize" :alt="img.title" />
+      </div>
+      <div v-else class="placeholder-large" :style="{ backgroundColor: img.color || '#ccc' }">
+        <span>暂无大图</span>
+      </div>
+
       <p>{{ img.description }}</p>
     </div>
   </div>
@@ -54,9 +61,17 @@ export default {
   padding: 0.5rem 1rem;
   cursor: pointer;
 }
-.lightbox-content img {
-  max-width: 100%;
-  display: block;
+
+/* 占位大方块 */
+.placeholder-large {
+  width: 400px;
+  height: 300px;
+  border: 2px dashed #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-weight: bold;
   margin: 0 auto;
 }
 </style>
