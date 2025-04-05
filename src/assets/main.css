@@ -1,5 +1,6 @@
 @import './base.css';
 
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -33,3 +34,9 @@ a,
     padding: 0 2rem;
   }
 }
+
+
+body, html, #app, .home, .slot-item {
+  font-family: 'Fira Code', monospace;
+}
+
