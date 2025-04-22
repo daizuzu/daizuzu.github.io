@@ -1,9 +1,9 @@
 <script setup>
-
+import MediaGallery from '@/components/MediaGallery.vue';
 </script>
 
 <template>
-  TBD
+  <MediaGallery folderName="virtual_exhibition" />
 </template>
 
 <style scoped>

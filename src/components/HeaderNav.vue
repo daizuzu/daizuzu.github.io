@@ -94,9 +94,13 @@ onUnmounted(() => {
 }
 
 .header a {
+  flex: 1 1 0;
+  text-align: center;
   text-decoration: none;
   color: #333;
+  padding: 10px;
 }
+
 
 .header a:hover {
   color: #000;
