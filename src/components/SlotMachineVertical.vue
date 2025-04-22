@@ -1,7 +1,7 @@
 <template>
   <div class="slot-machine">
     <div class="slot-wrapper">
-      <!-- column1 -->
+      <!-- column 1 -->
       <div class="slot-column column-1">
         <div
             ref="list1"
@@ -19,9 +19,10 @@
         </div>
       </div>
 
-      <div class="static-label">‑ is ‑</div>
+      <!-- static label -->
+      <div class="static-label">‑ is ‑</div>
 
-      <!-- column2 -->
+      <!-- column 2 -->
       <div class="slot-column column-2">
         <div
             ref="list2"
@@ -39,6 +40,7 @@
         </div>
       </div>
 
+      <!-- static label -->
       <div class="static-label">‑</div>
 
       <!-- column 3 -->
@@ -49,25 +51,25 @@
             :style="{ transform: `translateY(-${selectedIndex3 * itemHeightPx}px)` }"
         >
           <div
-            v-for="(item, index) in text3Options"
-        :key="index"
-        class="slot-item"
-        :class="{ active: index === selectedIndex3 }"
-        >
-        {{ item }}
+              v-for="(item, index) in text3Options"
+              :key="index"
+              class="slot-item"
+              :class="{ active: index === selectedIndex3 }"
+          >
+            {{ item }}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  </div>
 
-  <el-button
-      type="info"
-      plain
-      :style="{ marginTop: '1em', fontFamily: 'Monaco', cursor: 'pointer' }"
-      @click="rollSlots"
-  >
-    perform critique
-  </el-button>
+    <el-button
+        type="info"
+        plain
+        :style="{ marginTop: '1em', fontFamily: 'Monaco', cursor: 'pointer' }"
+        @click="rollSlots"
+    >
+      perform critique
+    </el-button>
   </div>
 </template>
 
@@ -83,11 +85,11 @@ export default {
       selectedIndex2: 0,
       selectedIndex3: 0,
       scaleFactor: 1,
-      itemHeightPx: 0,       // ← 实际像素高度
+      itemHeightPx: 0,
     };
   },
   mounted() {
-    this.handleResize();     // 第一次计算
+    this.handleResize();
     window.addEventListener('resize', this.handleResize);
   },
   beforeDestroy() {
@@ -100,16 +102,11 @@ export default {
       this.selectedIndex3 = Math.floor(Math.random() * this.text3Options.length);
     },
     handleResize() {
-      // 1) 更新缩放因子，让 clamp() 在大屏依旧等比
       this.scaleFactor = window.innerWidth / 1440;
       document.documentElement.style.setProperty('--scale', this.scaleFactor);
-
-      // 2) 读取实际行高（px）；只取一次就够，因为三列高度一致
       this.$nextTick(() => {
         const firstItem = this.$el.querySelector('.slot-item');
-        if (firstItem) {
-          this.itemHeightPx = firstItem.getBoundingClientRect().height;
-        }
+        if (firstItem) this.itemHeightPx = firstItem.getBoundingClientRect().height;
       });
     },
   },
@@ -117,9 +114,7 @@ export default {
 </script>
 
 <style scoped>
-:root {
-  --scale: 1;
-}
+:root { --scale: 1; }
 
 .slot-machine {
   display: flex;
@@ -127,23 +122,23 @@ export default {
   align-items: center;
 }
 
-/* 基础尺寸：clamp(最小, 设计稿×scale, 最大) —— 关键在于最小值够小，保证移动端可收缩 */
+/* -------- desktop / 默认横向 -------- */
 .slot-wrapper {
   display: flex;
   align-items: center;
   font-size: clamp(0.875rem, calc(3rem * var(--scale)), 3rem);
-  line-height: clamp(1rem, calc(3.6rem * var(--scale)), 3.6rem);
-  height:   clamp(1rem, calc(3.6rem * var(--scale)), 3.6rem);
-  gap:      clamp(0.25rem, calc(1rem * var(--scale)), 1rem);
+  line-height: clamp(1rem,   calc(3.6rem * var(--scale)), 3.6rem);
+  height:     clamp(1rem,   calc(3.6rem * var(--scale)), 3.6rem);
+  gap:        clamp(0.25rem, calc(1rem * var(--scale)), 1rem);
   font-family: 'Fira Code', monospace;
   width: 100%;
   padding: 0 1rem;
   box-sizing: border-box;
-  overflow: hidden;  /* 防止横向滚动条 */
+  overflow: hidden;
 }
 
 .slot-column {
-  height:   clamp(1rem, calc(3.6rem * var(--scale)), 3.6rem);
+  height: clamp(1rem, calc(3.6rem * var(--scale)), 3.6rem);
   overflow: hidden;
   position: relative;
 }
@@ -152,7 +147,7 @@ export default {
 .column-2 { width: clamp(6rem,  calc(18rem * var(--scale)), 18rem);
   border-left: 1px solid #999;
   border-right: 1px solid #999; }
-.column-3 { width: clamp(1rem,  calc(3rem  * var(--scale)),  3rem);
+.column-3 { width: clamp(1rem,  calc(3rem  * var(--scale)), 3rem);
   border-top:    1px solid #999;
   border-bottom: 1px solid #999; }
 
@@ -163,8 +158,8 @@ export default {
 }
 
 .slot-item {
-  height:     clamp(1rem, calc(3.6rem * var(--scale)), 3.6rem);
-  line-height:inherit;              /* 跟随父级 line‑height */
+  height: clamp(1rem, calc(3.6rem * var(--scale)), 3.6rem);
+  line-height: inherit;
   text-align: center;
   color: gray;
   transition: color 0.3s ease;
@@ -174,5 +169,34 @@ export default {
 
 .static-label {
   font-size: clamp(0.875rem, calc(3rem * var(--scale)), 3rem);
+}
+
+/* -------- mobile ≤600px：纵向 -------- */
+@media (max-width: 600px) {
+  .slot-wrapper {
+    flex-direction: column;
+    align-items: center;
+    height: auto;          /* 纵向不再需要固定高度 */
+    gap: 0.5rem;
+  }
+
+  .slot-column,
+  .static-label {
+    width: 100%;
+    text-align: center;
+  }
+
+  .column-1,
+  .column-2,
+  .column-3 { width: 100%; }
+
+  /* 调整边框方向，避免侧边竖线 */
+  .column-2 {
+    border-left: none;
+    border-right: none;
+    border-top:    1px solid #999;
+    border-bottom: 1px solid #999;
+  }
+  .column-3 { border: none; }
 }
 </style>
