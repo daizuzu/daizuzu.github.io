@@ -1,25 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <title>404</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Zhu Dai's collection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fdfdfd;
+        }
+        #app {
+            width: 100%;
+            min-height: 100vh;
+        }
+        nav {
+            background: gray;
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a.router-link-active {
+            border-bottom: 2px solid #fff;
+        }
+        .centered {
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            color: #bbbbbb;
+            font-family: 'Fira Code', monospace;
+        }
+    </style>
+  <script type="module" crossorigin src="/assets/index-BV73MqL6.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CGx072GW.css">
 </head>
 <body>
-<script>
-    (function(l) {
-        // https://github.com/rafrex/spa-github-pages
-        if (l.search) {
-            var q = {};
-            l.search.slice(1).split('&').forEach(function(v) {
-                var a = v.split('=');
-                q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-            });
-            if (q.p !== undefined) {
-                window.history.replaceState(null, null, q.p + (q.q ? ('?' + q.q) : '') + l.hash);
-            }
-        }
-    })(window.location);
-</script>
-<h1>404 Not Found</h1>
+<div class="centered">DAI</div>
+<div id="app"></div>
 </body>
 </html>
