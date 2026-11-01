@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/landing.css?v=question-layout-5" />
+  <link rel="stylesheet" href="assets/landing.css?v=fashion-spread-1" />
 </head>
 <body>
   <div class="page-shell">
@@ -22,26 +22,38 @@
           <button class="question-choice" type="button" data-view="other" aria-controls="other-screen" aria-label="what can i do?"><span>what can</span><span>i do?</span></button>
         </div>
       </section>
-      <section class="screen chapter-screen" id="fashion-screen" data-screen="fashion" hidden>
-        <button class="back-link" type="button" data-view="home">← Two questions</button>
-        <p class="chapter-label">01 / Fashion</p>
-        <h1>Do I like fashion?</h1>
-        <div class="poem">
-          <p>I liked making a small world in a window,<br />as I did when I was a kid.</p>
-          <p>But it takes years to know:<br />the props in the window came down so easily,<br />at a modern pace in a modern place,<br />like they ought to be.</p>
-          <p>Oh,<br />they don't feel fashionable anymore.</p>
+      <section class="screen chapter-screen fashion-screen" id="fashion-screen" data-screen="fashion" hidden>
+        <button class="back-link" type="button" data-view="home">← questions</button>
+        <div class="fashion-spread">
+          <div class="fashion-copy">
+            <p class="chapter-label">01 / Fashion</p>
+            <h1>Do I like fashion?</h1>
+            <div class="poem">
+              <p>I liked making a small world in a window,<br />as I did when I was a kid.</p>
+              <p>But it takes years to know:<br />the props in the window came down so easily,<br />at a modern pace in a modern place,<br />like they ought to be.</p>
+              <p>Oh,<br />they don't feel fashionable anymore.</p>
+            </div>
+            <div class="chapter-actions">
+              <a class="text-link" href="/project">Look at the projects <span aria-hidden="true">↗</span></a>
+              <button class="text-link reveal-button" type="button" aria-expanded="false" aria-controls="research-card" data-reveal="research-card">Some explorations <span class="reveal-mark" aria-hidden="true">＋</span></button>
+            </div>
+            <article class="research-card" id="research-card" hidden>
+              <p class="research-label">Research / FACTUM 2025</p>
+              <h2><a href="https://link.springer.com/chapter/10.1007/978-3-031-99481-4_14" target="_blank" rel="noopener noreferrer">Usability Challenges in Sentiment Analysis Tools: A Dual Approach for the Fashion Industry</a></h2>
+              <p class="abstract-label">Abstract</p>
+              <p class="abstract-text">This study represents one of the earliest explorations of usability challenges in sentiment analysis tools for the fashion domain. Through a dual approach—an industry survey and a heuristic evaluation of tools, including SentiStrength and IBM Watson NLU—this research identified a significant gap between the high-value professionals place on public sentiment and the inefficiencies of current methods. Key usability issues were identified, such as lack of efficiency and flexibility, poor documentation, and limited domain-specific adaptability. The study offers actionable recommendations for a more user-centric tool design. It highlights the need to develop more effective sentiment analysis solutions to meet the needs of fashion industry professionals.</p>
+              <div class="research-footer"><p class="access-count">5,338 accesses <span>on Springer, checked 1 November 2026</span></p><a class="text-link" href="https://link.springer.com/chapter/10.1007/978-3-031-99481-4_14" target="_blank" rel="noopener noreferrer">Read on Springer <span aria-hidden="true">↗</span></a></div>
+            </article>
+          </div>
+          <div class="fashion-gallery" role="group" aria-label="Photographs of fashion visual display work">
+            <figure class="fashion-image fashion-image--relief">
+              <img src="assets/IMG_6914.jpg" alt="A close view of a rough white sculptural display form." loading="lazy" />
+            </figure>
+            <figure class="fashion-image fashion-image--forms">
+              <img src="assets/IMG_0756.jpg" alt="White geometric display forms arranged across a studio floor." loading="lazy" />
+            </figure>
+          </div>
         </div>
-        <div class="chapter-actions">
-          <a class="text-link" href="/project">Look at the projects <span aria-hidden="true">↗</span></a>
-          <button class="text-link reveal-button" type="button" aria-expanded="false" aria-controls="research-card" data-reveal="research-card">Some explorations <span class="reveal-mark" aria-hidden="true">＋</span></button>
-        </div>
-        <article class="research-card" id="research-card" hidden>
-          <p class="research-label">Research / FACTUM 2025</p>
-          <h2><a href="https://link.springer.com/chapter/10.1007/978-3-031-99481-4_14" target="_blank" rel="noopener noreferrer">Usability Challenges in Sentiment Analysis Tools: A Dual Approach for the Fashion Industry</a></h2>
-          <p class="abstract-label">Abstract</p>
-          <p class="abstract-text">This study represents one of the earliest explorations of usability challenges in sentiment analysis tools for the fashion domain. Through a dual approach—an industry survey and a heuristic evaluation of tools, including SentiStrength and IBM Watson NLU—this research identified a significant gap between the high-value professionals place on public sentiment and the inefficiencies of current methods. Key usability issues were identified, such as lack of efficiency and flexibility, poor documentation, and limited domain-specific adaptability. The study offers actionable recommendations for a more user-centric tool design. It highlights the need to develop more effective sentiment analysis solutions to meet the needs of fashion industry professionals.</p>
-          <div class="research-footer"><p class="access-count">5,338 accesses <span>on Springer, checked 1 November 2026</span></p><a class="text-link" href="https://link.springer.com/chapter/10.1007/978-3-031-99481-4_14" target="_blank" rel="noopener noreferrer">Read on Springer <span aria-hidden="true">↗</span></a></div>
-        </article>
       </section>
       <section class="screen chapter-screen" id="other-screen" data-screen="other" hidden>
         <button class="back-link" type="button" data-view="home">← Two questions</button>
