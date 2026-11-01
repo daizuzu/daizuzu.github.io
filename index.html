@@ -8,17 +8,18 @@
   <title>Zhu Dai's collection</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/assets/landing.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/landing.css" />
 </head>
 <body>
   <div class="page-shell">
-    <header class="masthead"><a class="wordmark" href="/" aria-label="DAI home">DAI</a></header>
+    <header class="masthead"><a class="wordmark" href="/" aria-label="dai home">dai</a></header>
     <main id="main-content">
-      <section class="screen home-screen" data-screen="home" aria-label="Choose a question">
+      <section class="screen home-screen" data-screen="home" aria-label="questions">
+        <p class="home-kicker">questions</p>
         <div class="question-list">
-          <button class="question-choice" type="button" data-view="fashion" aria-controls="fashion-screen"><span class="question-number">01</span><span>Do I like fashion?</span><span class="question-arrow" aria-hidden="true">↗</span></button>
-          <button class="question-choice" type="button" data-view="other" aria-controls="other-screen"><span class="question-number">02</span><span>What can I do?</span><span class="question-arrow" aria-hidden="true">↗</span></button>
+          <button class="question-choice" type="button" data-view="fashion" aria-controls="fashion-screen">do i like fashion?</button>
+          <button class="question-choice" type="button" data-view="other" aria-controls="other-screen">what can i do?</button>
         </div>
       </section>
       <section class="screen chapter-screen" id="fashion-screen" data-screen="fashion" hidden>
@@ -52,7 +53,7 @@
         </div>
       </section>
     </main>
-    <footer class="page-footer"><span>DAI</span><button class="back-link" type="button" data-view="home" data-home-only hidden>Return to the questions ↑</button></footer>
+    <footer class="page-footer"><span>dai</span><button class="back-link" type="button" data-view="home" data-home-only hidden>Return to the questions ↑</button></footer>
   </div>
   <script>
     (() => {
