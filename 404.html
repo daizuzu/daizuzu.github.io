@@ -105,9 +105,29 @@
   };
 
   const updateArtChooser = () => {
-    if (window.location.pathname.replace(/\/+$/, "") !== "/art_practices") return;
+    const onArtPage = window.location.pathname.replace(/\/+$/, "") === "/art_practices";
+    if (!onArtPage) {
+      app.querySelectorAll(".art-category-picker, .art-back").forEach(node => node.remove());
+      for (const oldGallery of app.querySelectorAll(".gallery[data-icon-chooser-ready]")) {
+        oldGallery.style.display = "";
+        for (const item of oldGallery.children) item.style.display = "";
+        delete oldGallery.dataset.iconChooserReady;
+      }
+      return;
+    }
     const gallery = app.querySelector(".gallery");
-    if (!gallery || gallery.dataset.iconChooserReady) return;
+    if (!gallery) return;
+    const existingPickers = [...app.querySelectorAll(".art-category-picker")];
+    if (gallery.dataset.iconChooserReady && existingPickers.length) {
+      for (const extra of existingPickers.slice(1)) extra.remove();
+      return;
+    }
+    if (gallery.dataset.iconChooserReady) {
+      gallery.style.display = "";
+      for (const item of gallery.children) item.style.display = "";
+      delete gallery.dataset.iconChooserReady;
+    }
+    app.querySelectorAll(".art-category-picker, .art-back").forEach(node => node.remove());
     const sectionNames = ["art practices", "virtual exhibition", "illustration"];
     const groups = {};
     let activeGroup = null;
