@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f4">
+  <title>hua</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="topline">
+      <a href="https://www.daizhu.net/" aria-label="return to questions">← questions</a>
+    </header>
+
+    <section class="opening" aria-label="Hua">
+      <div class="hua-core">
+        <p class="hua-guide" id="hua-guide">click ↓ to see HUA</p>
+        <a class="hua-link" href="memories.html" aria-label="HUA — continue to the photographs">HUA</a>
+      </div>
+      <div class="statement-window" id="statement-window" aria-hidden="true">
+        <div class="statement-reel" id="statement-reel"></div>
+      </div>
+      <span class="visually-hidden" id="statement-announcement" aria-live="polite" aria-atomic="true"></span>
+      <div class="ask-wrap">
+        <span class="ask-arrow" id="ask-arrow" aria-hidden="true">
+          <svg viewBox="0 0 16 44" focusable="false">
+            <path d="M8 1v35M2 29l6 7 6-7" />
+          </svg>
+        </span>
+        <button class="ask-button" id="ask-hua" type="button" aria-label="show a thought about Hua">?</button>
+      </div>
+    </section>
+
+    <footer class="endline">
+      <span>dai</span>
+    </footer>
+  </main>
+  <script>
+    const statements = [
+      "was the unsaved life",
+      "was easy to bully, torture and, destroy",
+      "was the name given",
+      "can only miao",
+      "still trusts human",
+      "was in june 2020"
+    ];
+    const statementReel = document.getElementById("statement-reel");
+    const statementAnnouncement = document.getElementById("statement-announcement");
+    const askButton = document.getElementById("ask-hua");
+    const askArrow = document.getElementById("ask-arrow");
+    const guide = document.getElementById("hua-guide");
+    const statementIndices = statements.map((_, index) => index);
+    let deck = [];
+    let previous = -1;
+    let displayedIndex = null;
+    let isRolling = false;
+    let clickCount = 0;
+    let guideTimer;
+
+    function showHuaGuide() {
+      guide.classList.add("is-visible");
+      askArrow.classList.add("is-hidden");
+      window.clearTimeout(guideTimer);
+    }
+
+    function resetGuideTimer() {
+      window.clearTimeout(guideTimer);
+      guideTimer = window.setTimeout(showHuaGuide, 60000);
+    }
+
+    resetGuideTimer();
+
+    function shuffle(values) {
+      const shuffled = [...values];
+      for (let i = shuffled.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    askButton.addEventListener("click", () => {
+      if (isRolling) return;
+
+      clickCount += 1;
+      if (clickCount >= 3) showHuaGuide();
+      else resetGuideTimer();
+
+      if (deck.length === 0) {
+        deck = shuffle(statementIndices);
+        if (deck.length > 1 && deck[0] === previous) {
+          [deck[0], deck[1]] = [deck[1], deck[0]];
+        }
+      }
+
+      const finalIndex = deck.shift();
+      const fastRoll = [];
+      for (let round = 0; round < 2; round += 1) {
+        const cycle = shuffle(statementIndices);
+        if (fastRoll.length > 0 && cycle[0] === fastRoll[fastRoll.length - 1]) {
+          [cycle[0], cycle[1]] = [cycle[1], cycle[0]];
+        }
+        fastRoll.push(...cycle);
+      }
+      const slowRoll = shuffle(statementIndices.filter((index) => index !== finalIndex)).slice(0, 3);
+      if (slowRoll[0] === fastRoll[fastRoll.length - 1]) {
+        [slowRoll[0], slowRoll[1]] = [slowRoll[1], slowRoll[0]];
+      }
+      const rolling = [...fastRoll, ...slowRoll, finalIndex];
+      const startIndex = displayedIndex ?? shuffle(statementIndices.filter((index) => index !== rolling[0]))[0];
+      const reelItems = [startIndex, ...rolling];
+      const rollDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 900;
+      isRolling = true;
+      askButton.disabled = true;
+      statementAnnouncement.textContent = "";
+      statementReel.replaceChildren(...reelItems.map((index) => {
+        const line = document.createElement("p");
+        line.className = "hua-statement";
+        line.textContent = statements[index];
+        return line;
+      }));
+      statementReel.style.transitionDuration = "0ms";
+      statementReel.style.transform = "translateY(0px)";
+      statementReel.classList.add("is-rolling");
+      const rowHeight = statementReel.firstElementChild.getBoundingClientRect().height;
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          statementReel.style.transitionDuration = `${rollDuration}ms`;
+          statementReel.style.transform = `translateY(${-rowHeight * (reelItems.length - 1)}px)`;
+          window.setTimeout(() => {
+            statementReel.classList.remove("is-rolling");
+            displayedIndex = finalIndex;
+            previous = finalIndex;
+            statementAnnouncement.textContent = statements[finalIndex];
+            window.setTimeout(() => {
+              isRolling = false;
+              askButton.disabled = false;
+            }, 280);
+          }, rollDuration + 30);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

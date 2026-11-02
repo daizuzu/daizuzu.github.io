@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f4">
+  <title>hua</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="topline">
+      <a href="index.html" aria-label="back to Hua's page">← hua</a>
+    </header>
+
+    <section class="story-grid" aria-label="three photographs from Hua's story">
+      <button class="memory" type="button" aria-pressed="false" aria-label="found in box. Hua was found with every leg tightened by adhesive tape.">
+        <span class="memory-photo">
+          <img src="/assets/hua-found.png" alt="">
+        </span>
+        <span class="memory-citation">
+          <span class="photo-label">found in box</span>
+          <span>hua was found with every leg tightened by adhesive tape.</span>
+        </span>
+      </button>
+
+      <button class="memory" type="button" aria-pressed="false" aria-label="at the hospital. Hua was taken to hospital in a severe condition.">
+        <span class="memory-photo">
+          <img src="/assets/hua-treatment.png" alt="">
+        </span>
+        <span class="memory-citation">
+          <span class="photo-label">at the hospital</span>
+          <span>hua was taken to hospital in a severe condition.</span>
+        </span>
+      </button>
+
+      <button class="memory" type="button" aria-pressed="false" aria-label="trying to stand. Hua still trusted human hands. A few days later, despite every effort, she passed away.">
+        <span class="memory-photo">
+          <img src="/assets/hua-standing.png" alt="">
+        </span>
+        <span class="memory-citation">
+          <span class="photo-label">trying to stand</span>
+          <span>after all the violence, hua still trusted human hands. a few days later, despite every effort, she passed away.</span>
+        </span>
+      </button>
+    </section>
+
+    <section class="continue" aria-label="continue to unsaved">
+      <span class="continue-arrow" aria-hidden="true">
+        <svg viewBox="0 0 16 44" focusable="false">
+          <path d="M8 1v35M2 29l6 7 6-7" />
+        </svg>
+      </span>
+      <a class="exhibition-link" href="unsaved.html">what can i save?</a>
+    </section>
+
+    <footer class="endline">
+      <a href="https://www.daizhu.net/">back to two questions</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll(".memory").forEach((memory) => {
+      memory.addEventListener("click", () => {
+        const isOpen = memory.getAttribute("aria-pressed") === "true";
+        memory.setAttribute("aria-pressed", String(!isOpen));
+      });
+    });
+  </script>
+</body>
+</html>
