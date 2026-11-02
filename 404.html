@@ -197,5 +197,6 @@
   refresh();
 })();
 </script>
+<script>(()=>{const p=x=>x.replace(/\/+$/,"")||"/";if(p(location.pathname)==="/art_practices"){location.replace("/virtual_exhibition/");return}document.addEventListener("click",e=>{const t=e.target instanceof Element?e.target:e.target?.parentElement,a=t?.closest("a[href]");if(!a)return;const u=new URL(a.href,location.href);if(u.origin===location.origin&&p(u.pathname)==="/art_practices"){e.preventDefault();e.stopImmediatePropagation();location.assign("/virtual_exhibition/")}},true)})();</script>
 </body>
 </html>
