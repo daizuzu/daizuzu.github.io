@@ -32,6 +32,38 @@
         .art-category-default-name { display: none !important; }
         .art-category-hover-name { display: inline; }
         .art-category-choice:hover .art-category-name, .art-category-choice:focus-visible .art-category-name { opacity: 1; }
+        .art-category-icon { transition: opacity .2s ease, transform .25s ease; }
+        .art-category-name {
+            position: absolute;
+            top: .75rem;
+            left: 50%;
+            right: auto;
+            width: clamp(6rem, 16vw, 11rem);
+            height: clamp(6rem, 16vw, 11rem);
+            min-height: 0;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            transform: translateX(-50%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .2s ease;
+            font-size: clamp(.75rem, 1.3vw, .95rem);
+        }
+        .art-category-default-name { display: none !important; }
+        .art-category-choice:hover .art-category-icon,
+        .art-category-choice:focus-visible .art-category-icon { opacity: 0; }
+        .art-category-choice:hover .art-category-name,
+        .art-category-choice:focus-visible .art-category-name { opacity: 1; }
+        @media (max-width: 600px) {
+            .art-category-name {
+                top: .4rem;
+                width: clamp(5rem, 25vw, 7rem);
+                height: clamp(5rem, 25vw, 7rem);
+                font-size: .72rem;
+            }
+        }
+
 </style>
   <script type="module" crossorigin src="/assets/index-C_kLZWoo.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-6wTNU3Ev.css">
