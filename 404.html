@@ -15,6 +15,17 @@
         nav a.router-link-active { border-bottom: 2px solid #fff; }
         .centered { position: fixed; top: 25%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; color: #bbbbbb; font-family: 'Fira Code', monospace; }
         #app, #app * { font-family: "Space Grotesk", Arial, sans-serif !important; }
+        .art-category-picker { max-width: 980px; margin: clamp(2rem, 6vw, 5rem) auto; padding: 0 clamp(1rem, 4vw, 3rem); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 5vw, 4rem); align-items: start; }
+        .art-category-choice { display: grid; justify-items: center; align-content: start; gap: 1rem; min-width: 0; padding: .75rem; color: #272727; border: 0; background: transparent; cursor: pointer; font: inherit; }
+        .art-category-icon { display: block; width: clamp(6rem, 16vw, 11rem); aspect-ratio: 1; object-fit: contain; transition: transform .25s ease; }
+        .art-category-choice:hover .art-category-icon, .art-category-choice:focus-visible .art-category-icon { transform: scale(1.045); }
+        .art-category-name { font-size: clamp(.75rem, 1.3vw, .95rem); letter-spacing: .04em; text-align: center; min-height: 1.5em; }
+        .art-category-hover-name { display: none; }
+        .art-category-choice:hover .art-category-default-name, .art-category-choice:focus-visible .art-category-default-name { display: none; }
+        .art-category-choice:hover .art-category-hover-name, .art-category-choice:focus-visible .art-category-hover-name { display: inline; }
+        .art-category-choice:focus-visible, .art-back:focus-visible { outline: 1px solid #555; outline-offset: 5px; }
+        .art-back { display: block; margin: 0 0 1.5rem; padding: .35rem 0; border: 0; border-bottom: 1px solid #777; background: transparent; color: #333; cursor: pointer; font: inherit; }
+        @media (max-width: 600px) { .art-category-picker { gap: .5rem; margin: 2.5rem auto; padding: 0 .5rem; } .art-category-choice { gap: .65rem; padding: .4rem; } .art-category-icon { width: clamp(5rem, 25vw, 7rem); } .art-category-name { font-size: .72rem; } }
     </style>
   <script type="module" crossorigin src="/assets/index-C_kLZWoo.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-6wTNU3Ev.css">
@@ -29,16 +40,16 @@
     const url = typeof input === "string" ? input : input.url;
     if (/^\/assets\/(art_practices|virtual_exhibition|illustration)\/index\.json(?:\?.*)?$/.test(url)) {
       const separator = url.includes("?") ? "&" : "?";
-      return originalFetch(url + separator + "v=art-merge-20261102", options);
+      return originalFetch(url + separator + "v=art-icons-20261102", options);
     }
     return originalFetch(input, options);
   };
 
   const app = document.getElementById("app");
   if (!app) return;
+
   const updateMenu = () => {
-    const links = [...app.querySelectorAll("nav a")];
-    for (const link of links) {
+    for (const link of app.querySelectorAll("nav a")) {
       const path = new URL(link.href, window.location.origin).pathname.replace(/\/+$/, "") || "/";
       let label = null;
       if (path === "/") label = "questions";
@@ -54,8 +65,78 @@
       }
     }
   };
-  new MutationObserver(updateMenu).observe(app, { childList: true, subtree: true });
-  updateMenu();
+
+  const updateArtChooser = () => {
+    if (window.location.pathname.replace(/\/+$/, "") !== "/art_practices") return;
+    const gallery = app.querySelector(".gallery");
+    if (!gallery || gallery.dataset.iconChooserReady) return;
+    const sectionNames = ["art practices", "virtual exhibition", "illustration"];
+    const groups = {};
+    let activeGroup = null;
+    for (const item of [...gallery.children]) {
+      const text = item.matches(".gallery-text") ? item.textContent.trim().toLowerCase() : "";
+      if (sectionNames.includes(text)) { activeGroup = text; groups[activeGroup] = [item]; continue; }
+      if (activeGroup) groups[activeGroup].push(item);
+    }
+    if (!sectionNames.every(name => groups[name]?.length)) return;
+    gallery.dataset.iconChooserReady = "true";
+
+    const choices = [
+      { section: "art practices", short: "art", icon: "/assets/art-practices-icon.png" },
+      { section: "virtual exhibition", short: "unsaved", icon: "/assets/virtual-exhibition-icon.png" },
+      { section: "illustration", short: "drawings", icon: "/assets/illustration-icon.png" }
+    ];
+    const picker = document.createElement("section");
+    picker.className = "art-category-picker";
+    picker.setAttribute("aria-label", "choose an art section");
+    const allItems = sectionNames.flatMap(name => groups[name]);
+    for (const choice of choices) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "art-category-choice";
+      button.setAttribute("aria-label", choice.section);
+      const img = document.createElement("img");
+      img.className = "art-category-icon";
+      img.src = choice.icon;
+      img.alt = "";
+      const name = document.createElement("span");
+      name.className = "art-category-name";
+      const normal = document.createElement("span");
+      normal.className = "art-category-default-name";
+      normal.textContent = choice.section;
+      const hover = document.createElement("span");
+      hover.className = "art-category-hover-name";
+      hover.textContent = choice.short;
+      name.append(normal, hover);
+      button.append(img, name);
+      button.addEventListener("click", () => {
+        picker.hidden = true;
+        gallery.style.display = "";
+        for (const item of allItems) item.style.display = groups[choice.section].includes(item) ? "" : "none";
+        back.hidden = false;
+      });
+      picker.append(button);
+    }
+    const back = document.createElement("button");
+    back.type = "button";
+    back.className = "art-back";
+    back.textContent = "← could i (art)?";
+    back.hidden = true;
+    back.addEventListener("click", () => {
+      for (const item of allItems) item.style.display = "none";
+      back.hidden = true;
+      gallery.style.display = "none";
+      picker.hidden = false;
+    });
+    gallery.insertBefore(back, gallery.firstChild);
+    for (const item of allItems) item.style.display = "none";
+    gallery.style.display = "none";
+    gallery.parentElement.insertBefore(picker, gallery);
+  };
+
+  const refresh = () => { updateMenu(); updateArtChooser(); };
+  new MutationObserver(refresh).observe(app, { childList: true, subtree: true });
+  refresh();
 })();
 </script>
 </body>
