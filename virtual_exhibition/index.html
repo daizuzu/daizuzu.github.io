@@ -143,5 +143,5 @@
       });
     });
   </script>
-  <script>(()=>{const arrival=document.getElementById("hua-arrival");if(!arrival||new URLSearchParams(window.location.search).get("from")!=="unsaved")return;const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;const fade=reduced?0:600;document.body.classList.add("hua-arriving");arrival.hidden=false;window.setTimeout(()=>{if(!reduced)arrival.classList.add("is-leaving");window.setTimeout(()=>{arrival.hidden=true;arrival.classList.remove("is-leaving");document.body.classList.remove("hua-arriving");window.history.replaceState(null,"",window.location.pathname+window.location.hash)},fade)},5000-fade)})();</script></body>
+  <script>(()=>{const arrival=document.getElementById("hua-arrival");if(!arrival)return;const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;const fade=reduced?0:600;document.body.classList.add("hua-arriving");arrival.hidden=false;window.setTimeout(()=>{if(!reduced)arrival.classList.add("is-leaving");window.setTimeout(()=>{arrival.hidden=true;arrival.classList.remove("is-leaving");document.body.classList.remove("hua-arriving");window.history.replaceState(null,"",window.location.pathname+window.location.hash)},fade)},5000-fade)})();</script></body>
 </html>
