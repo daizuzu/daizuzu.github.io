@@ -168,7 +168,7 @@
       name.append(normal, hover);
       button.append(img, name);
       button.addEventListener("click", () => {
-        picker.hidden = true;
+        if (choice.section === "virtual exhibition") { window.location.assign("/virtual_exhibition/?from=unsaved"); return; } picker.hidden = true;
         gallery.style.display = "";
         for (const item of allItems) item.style.display = groups[choice.section].includes(item) ? "" : "none";
         back.hidden = false;
