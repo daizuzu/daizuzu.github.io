@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f7f4">
   <title>hua</title>
-  <link rel="stylesheet" href="style.css"><style>.hua-arrival{position:absolute;top:50%;left:50%;z-index:5;width:min(92vw,700px);margin:0;color:var(--ink);font:500 clamp(12px,1.35vw,18px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:0;text-align:center;text-transform:none;white-space:nowrap;opacity:1;transform:translate(-50%,-50%);transition:opacity 600ms ease}.hua-arrival.is-leaving{opacity:0}.hua-arrival[hidden]{display:none!important}body.hua-arriving .topline,body.hua-arriving .hua-guide,body.hua-arriving .hua-link,body.hua-arriving .statement-window,body.hua-arriving .ask-wrap,body.hua-arriving .endline{visibility:hidden}body.hua-arriving .ask-wrap{display:none!important}.topline{font:500 clamp(13px,1.4vw,16px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:0}.topline a{color:#666}.hua-guide{font:500 clamp(13px,1.35vw,16px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:.01em;color:#666b6b}@media(max-width:700px){.hua-arrival{font-size:13px;white-space:nowrap;width:96vw}}@media(prefers-reduced-motion:reduce){.hua-arrival{transition:none}}</style>
+  <link rel="stylesheet" href="style.css"><style>.hua-arrival{position:absolute;top:50%;left:50%;z-index:5;width:min(92vw,700px);margin:0;color:var(--ink);font:500 clamp(12px,1.35vw,18px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:0;text-align:center;text-transform:none;white-space:nowrap;opacity:1;transform:translate(-50%,-50%);transition:opacity 600ms ease}.hua-arrival.is-leaving{opacity:0}.hua-arrival[hidden]{display:none!important}body.hua-arriving .topline,body.hua-arriving .hua-guide,body.hua-arriving .hua-link,body.hua-arriving .statement-window,body.hua-arriving .ask-wrap,body.hua-arriving .endline{visibility:hidden}body.hua-arriving .ask-wrap{display:none!important}.topline{font:500 clamp(13px,1.4vw,16px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:0}.topline a{color:#666}.hua-guide{display:grid;justify-items:center;gap:3px;font:500 clamp(13px,1.35vw,16px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:.01em;color:#666b6b}.hua-guide-arrow{display:block;font-size:24px;line-height:1;animation:hua-guide-nudge 1.2s ease-in-out infinite}@keyframes hua-guide-nudge{0%,100%{transform:translateY(0);opacity:.55}50%{transform:translateY(5px);opacity:1}}@media(max-width:700px){.hua-arrival{font-size:13px;white-space:nowrap;width:96vw}}@media(prefers-reduced-motion:reduce){.hua-arrival{transition:none}.hua-guide-arrow{animation:none}}</style>
 </head>
 <body>
   <main class="page">
@@ -15,7 +15,7 @@
 
     <section class="opening" aria-label="Hua">
       <div class="hua-core"><p class="hua-arrival" id="hua-arrival" aria-live="polite" hidden>this is a brief intro of Hua's brief life</p>
-        <p class="hua-guide" id="hua-guide">click HUA to continue</p>
+        <p class="hua-guide" id="hua-guide"><span class="hua-guide-arrow" aria-hidden="true">↓</span><span>click to continue</span></p>
         <a class="hua-link" href="memories.html" aria-label="HUA — continue to the photographs">HUA</a>
       </div>
       <div class="statement-window" id="statement-window" aria-hidden="true">
