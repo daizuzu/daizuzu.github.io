@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f7f4">
   <title>hua</title>
-  <link rel="stylesheet" href="style.css"><style>.hua-arrival{position:absolute;bottom:calc(100% + 20px);left:50%;width:min(85vw,560px);margin:0;color:var(--muted);font:400 10px/1.5 "Fira Code",monospace;letter-spacing:.05em;text-align:center;text-transform:lowercase;opacity:0;transform:translate(-50%,5px);transition:opacity 900ms ease,transform 900ms ease}.hua-arrival.is-visible{opacity:1;transform:translate(-50%,0)}.hua-arrival.is-leaving{opacity:0;transform:translate(-50%,-5px)}.hua-arrival[hidden]{display:none!important}@media(max-width:700px){.hua-arrival{font-size:9px}}@media(prefers-reduced-motion:reduce){.hua-arrival{transition:none}}</style>
+  <link rel="stylesheet" href="style.css"><style>.hua-arrival{position:absolute;top:50%;left:50%;z-index:5;width:min(92vw,700px);margin:0;color:var(--ink);font:500 clamp(12px,1.35vw,18px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:0;text-align:center;text-transform:none;white-space:nowrap;opacity:1;transform:translate(-50%,-50%);transition:opacity 600ms ease}.hua-arrival.is-leaving{opacity:0}.hua-arrival[hidden]{display:none!important}body.hua-arriving .topline,body.hua-arriving .hua-guide,body.hua-arriving .hua-link,body.hua-arriving .statement-window,body.hua-arriving .ask-wrap,body.hua-arriving .endline{visibility:hidden}.topline{font:500 clamp(13px,1.4vw,16px)/1.4 "Space Grotesk",Arial,sans-serif;letter-spacing:0}.topline a{color:#666}@media(max-width:700px){.hua-arrival{font-size:13px;white-space:nowrap;width:96vw}}@media(prefers-reduced-motion:reduce){.hua-arrival{transition:none}}</style>
 </head>
 <body>
   <main class="page">
     <header class="topline">
-      <a href="https://www.daizhu.net/" aria-label="return to questions">← questions</a>
+      <a href="https://www.daizhu.net/" aria-label="return to questions">← questions</a> <a href="https://www.daizhu.net/art_practices" aria-label="return to could i art chooser">could i(art)? →</a>
     </header>
 
     <section class="opening" aria-label="Hua">
-      <div class="hua-core"><p class="hua-arrival" id="hua-arrival" aria-live="polite" hidden>found with her legs taped; cared for, then gone.</p>
-        <p class="hua-guide" id="hua-guide">click ↓ to see HUA</p>
+      <div class="hua-core"><p class="hua-arrival" id="hua-arrival" aria-live="polite" hidden>this is a brief intro of Hua's brief life</p>
+        <p class="hua-guide" id="hua-guide">click HUA to continue</p>
         <a class="hua-link" href="memories.html" aria-label="HUA — continue to the photographs">HUA</a>
       </div>
       <div class="statement-window" id="statement-window" aria-hidden="true">
@@ -143,5 +143,5 @@
       });
     });
   </script>
-  <script>(()=>{const arrival=document.getElementById("hua-arrival");if(!arrival||new URLSearchParams(window.location.search).get("from")!=="unsaved")return;arrival.hidden=false;arrival.className="hua-arrival";const reduceMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;arrival.style.cssText="position:fixed;top:22vh;left:50%;bottom:auto;z-index:5;width:min(92vw,640px);margin:0;color:#555555;font:500 clamp(13px,1.4vw,18px)/1.45 'Space Grotesk',Arial,sans-serif;letter-spacing:.01em;text-align:center;text-transform:lowercase;opacity:0;transform:translate(-50%,5px);transition:"+(reduceMotion?"none":"opacity 900ms ease,transform 900ms ease");requestAnimationFrame(()=>{arrival.style.opacity="1";arrival.style.transform="translate(-50%,0)"});window.setTimeout(()=>{arrival.style.opacity="0";arrival.style.transform="translate(-50%,-5px)";window.setTimeout(()=>{arrival.hidden=true;arrival.removeAttribute("style");window.history.replaceState(null,"",window.location.pathname+window.location.hash)},1550)},8000)})();</script></body>
+  <script>(()=>{const arrival=document.getElementById("hua-arrival");if(!arrival||new URLSearchParams(window.location.search).get("from")!=="unsaved")return;const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;const fade=reduced?0:600;document.body.classList.add("hua-arriving");arrival.hidden=false;window.setTimeout(()=>{if(!reduced)arrival.classList.add("is-leaving");window.setTimeout(()=>{arrival.hidden=true;arrival.classList.remove("is-leaving");document.body.classList.remove("hua-arriving");window.history.replaceState(null,"",window.location.pathname+window.location.hash)},fade)},3000-fade)})();</script></body>
 </html>
