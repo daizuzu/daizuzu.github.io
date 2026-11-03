@@ -143,5 +143,5 @@
       });
     });
   </script>
-  <script>(()=>{const arrival=document.getElementById("hua-arrival");if(!arrival||new URLSearchParams(window.location.search).get("from")!=="unsaved")return;arrival.hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>arrival.classList.add("is-visible")));window.setTimeout(()=>{arrival.classList.remove("is-visible");arrival.classList.add("is-leaving");window.setTimeout(()=>{arrival.hidden=true;window.history.replaceState(null,"",window.location.pathname+window.location.hash)},950)},4300)})();</script></body>
+  <script>(()=>{const arrival=document.getElementById("hua-arrival");if(!arrival||new URLSearchParams(window.location.search).get("from")!=="unsaved")return;arrival.hidden=false;arrival.className="hua-guide";arrival.classList.add("is-visible");window.setTimeout(()=>{arrival.classList.remove("is-visible");window.setTimeout(()=>{arrival.hidden=true;window.history.replaceState(null,"",window.location.pathname+window.location.hash)},1550)},4300)})();</script></body>
 </html>
